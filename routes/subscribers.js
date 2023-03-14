@@ -31,6 +31,17 @@ router.post('/', async (req, res) => {
   }
 });
 
+
+// Deleting One
+router.delete('/:id', getSubscriber, async (req, res) => {
+  try {
+    await res.subscriber.remove();
+    res.json({ message: 'Deleted Subscriber' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 async function getSubscriber(req, res, next) {
   let subscriber;
   try {
