@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Subscriber = require('../models/subscriber');
 
-// Getting all
 router.get('/', async (req, res) => {
   try {
     const subscribers = await Subscriber.find();
@@ -12,12 +11,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Getting One
 router.get('/:id', getSubscriber, (req, res) => {
   res.json(res.subscriber);
 });
 
-// Creating one
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
     name: req.body.name,
@@ -31,7 +28,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Updating One
 router.patch('/:id', getSubscriber, async (req, res) => {
   if (req.body.name != null) {
     res.subscriber.name = req.body.name;
@@ -47,7 +43,6 @@ router.patch('/:id', getSubscriber, async (req, res) => {
   }
 });
 
-// Deleting One
 router.delete('/:id', getSubscriber, async (req, res) => {
   try {
     await res.subscriber.remove();
